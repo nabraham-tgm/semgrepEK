@@ -100,3 +100,4 @@ class Generator:
             self.pixmapC = "papier.png"
 
     #if __name__ == '__main__':
+        query = "SELECT * FROM users WHERE id = %s"
