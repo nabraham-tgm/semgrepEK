@@ -1,5 +1,7 @@
 import re
 
+query = "SELECT * FROM users WHERE id = %s"
+
 def get_user():
     user_id = input("Enter user ID: ")
     if not user_id.isdigit():
@@ -16,4 +18,4 @@ if __name__ == "__main__":
     user_id = get_user()
     user_data = get_user_data(user_id)
 
-query = "SELECT * FROM users WHERE id = %s"
+
