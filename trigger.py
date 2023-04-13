@@ -11,7 +11,7 @@ def get_user_data(user_id):
     pass
 
 if __name__ == "__main__":
-    password = input("Enter password: ")
+    password = "test123"
     query = "SELECT * FROM users WHERE id = %s"
     user_id = get_user()
     user_data = get_user_data(user_id)
