@@ -10,12 +10,10 @@ def get_user_data(user_id):
     # Connect to database and retrieve user data
     pass
 
-def get_query():
-    query = "SELECT * FROM users WHERE id = %s"
-    return query
-
 if __name__ == "__main__":
     password = "test123"
     query = "SELECT * FROM users WHERE id = %s"
     user_id = get_user()
     user_data = get_user_data(user_id)
+
+query = "SELECT * FROM users WHERE id = %s"
