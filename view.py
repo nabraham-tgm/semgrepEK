@@ -1,55 +1,33 @@
 from PyQt6.QtWidgets import *
-from PyQt6.QtGui import *
 from PyQt6 import uic
-from Controller import Controller
+from controller import Controller
+
 class View(QMainWindow):
     def __init__(self, c: Controller):
         super().__init__()
-        uic.loadUi("layout.ui", self)
-        self.aktion.addItem("Schere")
-        self.aktion.addItem("Stein")
-        self.aktion.addItem("Papier")
+        uic.loadUi("gui.ui", self)
         self.pb_execute.clicked.connect(c.execute)
         self.pb_reset.clicked.connect(c.reset)
-        self.aktion.setToolTip("Wähle einen Spielzug aus")
-        self.pb_execute.setToolTip("Ausführen")
-        self.pb_reset.setToolTip("Zurücksetzen")
-        self.pb_close.setToolTip("Schließen")
+        self.inputNum.setRange(-1000,1000)
+        self.setWindowTitle("Wurzelberechnung mit komplexen Zahlen")
+        self.setTextStatusBar("Bitte geben Sie eine Zahl zur Berechnung der Wurzel ein")
 
     def reset(self)->None:
-        self.aktion.setCurrentIndex(0)
-        self.player.setText("0")
-        self.computer.setText("0")
-        self.round.setText("1")
-        self.playerpic.setPixmap(QPixmap())
-        self.computerpic.setPixmap(QPixmap())
-        self.set_text_statusbar(
-    "Wähle einen Spielzug und klicke auf 'Ausführen' ")
+        self.inputNum.setValue(0.00)
+        self.checkK.setChecked(False)
+        self.output.clear()
+        self.setTextStatusBar("Keine Berechnung durchgeführt!")
 
-    def set_round(self, t: str)->None:
-        self.round.setText(t)
+    def setTextStatusBar(self, text):
+        self.statusbar.showMessage(text)
 
-    def set_text_statusbar(self, t: str)->None:
-        self.statusbar.showMessage(t)
+    def get_inputNum(self)->float:
+        return self.inputNum.value()
 
-    def set_player(self, t:str)->None:
-        self.player.setText(t)
+    def get_checked(self)->bool:
+        return self.checkK.isChecked()
 
-    def set_computer(self, t:str)->None:
-        self.computer.setText(t)
+    def set_output(self, t:str)->None:
+        self.output.setText(t)
 
-    def set_playerpic(self, t:str)->None:
-        self.playerpic.setPixmap(QPixmap(t))
 
-    def set_computerpic(self, t:str)->None:
-        self.computerpic.setPixmap(QPixmap(t))
-
-    def get_aktion(self)->str:
-        return self.aktion.currentText()
-
-if __name__ == '__main__':
-    import sys
-    app = QApplication([])
-    v = View()
-    v.show()
-    sys.exit(app.exec())
